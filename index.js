@@ -5,36 +5,50 @@ function main() {
 
     // generating plain bot table
     const botBoard = document.getElementById("botBoard");
-    // console.log(botBoardTable);
+    let botBoardArr = [];
 
     const botBoardTable = document.createElement("table");
+
     for (let i = 0; i < size; i++) {
         const row = document.createElement("tr");
+
+        botBoardArr.push([]);
         for (let j = 0; j < size; j++) {
+
             const col = document.createElement("td");
             row.appendChild(col);
+
+            botBoardArr[i].push(undefined);
         };
         botBoardTable.appendChild(row);
     };
+
     botBoard.appendChild(botBoardTable);
+    console.table(botBoardArr);
 
 
     // adding ships to bot table
-    const flags = 4;
-    let botShips = []
-    for (let i = 0; i < flags; i++) {
-        botShips.push([])
-        for (let j = 0; j < flags - i; j++) {
-            for (let k = 0; k < j + 1; k++) {
-                botShips[i].push(1);
+    const types = 4;
+    let botShips = [];
+    let counter = 0;
 
-            }
+    for (let i = 1; i < types + 1; i++) {
+        // console.log(i);
+        for (let j = 1; j < i + 1; j++) {
+            // console.warn(i, j);
+            botShips.push([]);
+            for (let k = 0; k < (types - i) + 1; k++) {
+                botShips[counter].push(1);
+                console.log(counter);
+            };
+            counter++;
         };
     };
-    console.table(botShips)
 
-    let botBoardArr = [];
-    botBoardArr.push([]);
-    botBoardArr[0].push(undefined);
-    console.table(botBoardArr);
+    for (let i = 0; i < botShips.length; i++) {
+
+    };
+
+    console.table(botShips);
+
 };
