@@ -19,3 +19,7 @@ td {
     border-radius: 2px;
 
 }
+
+td.filled {
+    background-color: black;
+}
