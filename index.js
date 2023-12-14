@@ -15,7 +15,7 @@ function main() {
     };
     console.table(botBoardArr);
 
-    updateBoard(botBoard, botBoardArr)
+    updateBoard(botBoard, botBoardArr);
 
 
     // adding ships to bot table
@@ -36,19 +36,73 @@ function main() {
     };
     console.log(botShips);
 
-    for (let i = 0; i < botShips.length; i++) {
-        const orient = Math.floor(Math.random() * 2);
-        // for (let j = 0; j < botShips[i]; j++) {
-
-
-        // };
-    };
-
-
-
+    // for (let i = 0; i < botShips.length; i++) {
+    //     placeRandom(botShips[i]);
+    // };
+    placeRandom(4);
 
 
     // functions
+
+
+    // place ship on random posiotion
+    function placeRandom(ship) {
+        // const orient = Math.floor(Math.random() * 2);
+        const orient = 1;
+        let posX = 0;
+        let posY = 0;
+
+        switch (orient) {
+            case 0:
+                posX = Math.floor(Math.random() * 10);
+                posY = Math.floor(Math.random() * (10 - ship));
+
+                console.log(orient, posX, posY);
+                for (let i = -1; i < 2; i++) {
+                    posY != 0 ?
+                        botBoardArr[posX + i][posY - 1] = 0 : null;
+                };
+
+                for (let i = 0; i < ship; i++) {
+                    botBoardArr[posX][posY + i] = 1;
+                    botBoardArr[posX + 1][posY + i] = 0;
+                    botBoardArr[posX - 1][posY + i] = 0;
+                };
+                for (let i = -1; i < 2; i++) {
+                    posY != (botBoardArr.length - 1) ?
+                        botBoardArr[posX + i][posY + ship] = 0 : null;
+                };
+                break;
+
+            case 1:
+                posX = Math.floor(Math.random() * (10 - 3));
+                posY = Math.floor(Math.random() * 10);
+
+                console.log(orient, posX, posY);
+                for (let i = -1; i < 2; i++) {
+                    posX != 0 ?
+                        botBoardArr[posX - 1][posY + i] = 0 : null;
+                };
+
+                for (let i = 0; i < ship; i++) {
+                    botBoardArr[posX + i][posY] = 1;
+                    posY != (botBoardArr.length - 1) ? botBoardArr[posX + i][posY + 1] = 0 : null;
+                    posY != 0 ? botBoardArr[posX + i][posY - 1] = 0 : null;
+                };
+                for (let i = -1; i < 2; i++) {
+                    posX != (botBoardArr.length - 1) ?
+                        botBoardArr[posX + ship][posY + i] = 0 : null;
+                };
+
+                break;
+
+            default:
+                console.error("Math random for orientation did ucky wucky: ", orient);
+                break;
+        };
+        console.table(botBoardArr);
+        updateBoard(botBoard, botBoardArr);
+    };
 
 
     // update board function
@@ -64,8 +118,10 @@ function main() {
 
                 switch (boardArr[i][j]) {
                     case undefined:
-                    case 0:
                         null;
+                        break;
+                    case 0:
+                        col.className = "surr";
                         break;
 
                     case 1:
