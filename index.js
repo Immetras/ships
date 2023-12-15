@@ -1,11 +1,21 @@
 // init function
 function main() {
     const size = 10;
+
+
+    // ship list
+    const types = 4;
+    let ships = [];
+
+    for (let i = 1; i < types + 1; i++) {
+        for (let j = 1; j < i + 1; j++) {
+            ships.push((types - i) + 1);
+        };
+    };
+
+
+    // bot generaion
     const botBoard = document.getElementById("botBoard");
-    const playerBoard = document.getElementById("playerBoard");
-
-
-    // generating plain bot table
     let botBoardArr = [];
 
     for (let i = 0; i < size + 2; i++) {
@@ -20,21 +30,7 @@ function main() {
 
 
     // adding ships to bot table
-    const types = 4;
-    let botShips = [];
-    // let counter = 0;
-
-    for (let i = 1; i < types + 1; i++) {
-        // console.log(i);
-        for (let j = 1; j < i + 1; j++) {
-            // console.warn(i, j);
-            botShips.push((types - i) + 1);
-            // for (let k = 0; k < (types - i) + 1; k++) {
-            //     botShips[counter].push(1);
-            // };
-            // counter++;
-        };
-    };
+    let botShips = ships;
     console.log(botShips);
 
     for (let i = 0; i < botShips.length; i++) {
@@ -49,10 +45,32 @@ function main() {
 
 
 
+    // player
+    const playerBoard = document.getElementById("playerBoard");
+    let playerBoardArr = [];
+
+    for (let i = 0; i < size + 2; i++) {
+        playerBoardArr.push([]);
+        for (let j = 0; j < size + 2; j++) {
+            playerBoardArr[i].push(undefined);
+        };
+    };
+    console.table(playerBoardArr);
+
+    updateBoard(playerBoard, playerBoardArr);
+
+    let playerships = ships;
+
+    for (let i = 0; i < playerships; i++) {
+        for (let j = 0; j < types; j++) {
+
+        };
+    };
+
+
 
 
     // functions
-
 
     // place ship on random posiotion
     function placeRandom(ship) {
@@ -82,7 +100,7 @@ function main() {
         posX++;
         posY++;
         return place(posX, posY, orient, botBoardArr, ship);
-        
+
         // console.table(botBoardArr);
     };
 
