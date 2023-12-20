@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    border-radius: 2px;
     /* user-select: none; */
 }
 
@@ -27,4 +28,44 @@ td.filled {
 
 td.surr {
     background-color: aqua;
+}
+
+#main {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#playerShips,
+#playerBoard,
+#botBoard {
+    margin: 5px;
+}
+
+
+#playerShips {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.displayShip {
+    border-radius: 2px;
+    border: 1px solid black;
+    display: flex;
+
+}
+
+.displayShip .flag {
+    border: 1px solid black;
+    width: 22px;
+    height: 20px;
+    /* background-color: aqua; */
 }

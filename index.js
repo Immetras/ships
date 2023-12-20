@@ -9,7 +9,10 @@ function main() {
 
     for (let i = 1; i < types + 1; i++) {
         for (let j = 1; j < i + 1; j++) {
-            ships.push((types - i) + 1);
+            ships.push({
+                type: (types - i) + 1,
+                placed: false,
+            });
         };
     };
 
@@ -34,9 +37,9 @@ function main() {
     console.log(botShips);
 
     for (let i = 0; i < botShips.length; i++) {
-        let cantFit = placeRandom(botShips[i]);
+        let cantFit = placeRandom(botShips[i].type);
         while (cantFit) {
-            cantFit = placeRandom(botShips[i]);
+            cantFit = placeRandom(botShips[i].type);
         };
     };
 
@@ -59,12 +62,43 @@ function main() {
 
     updateBoard(playerBoard, playerBoardArr);
 
-    let playerships = ships;
+    let playerShips = ships;
+    console.table(playerShips);
 
-    for (let i = 0; i < playerships; i++) {
-        for (let j = 0; j < types; j++) {
+    const shipDisplay = document.getElementById("playerShips");
+
+    for (let i = 0; i < playerShips.length; i++) {
+
+        if (!playerShips[i].placed) {
+            const playerShip = document.createElement("div");
+            playerShip.className = "displayShip";
+            playerShip.style.width = `${playerShips[i].type * 20 + 2}px`;
+
+            playerShip.addEventListener("mouseover", function () {
+                for (let k = 0; k < this.children.length; k++) {
+                    this.children[k].style.backgroundColor = "red"
+
+                };
+                // console.log(this.parentElement.children)
+            });
+            playerShip.addEventListener("mouseleave", function () {
+                for (let k = 0; k < this.children.length; k++) {
+                    this.children[k].style.backgroundColor = null;
+
+                };
+
+            });
+
+            for (let j = 0; j < playerShips[i].type; j++) {
+                const shipFlag = document.createElement("div");
+                shipFlag.className = "flag";
+
+                playerShip.appendChild(shipFlag);
+            };
+            shipDisplay.appendChild(playerShip);
 
         };
+
     };
 
 
@@ -72,7 +106,7 @@ function main() {
 
     // functions
 
-    // place ship on random posiotion
+    // place ship on random position
     function placeRandom(ship) {
         const len = (botBoardArr.length) - 2;
         const orient = Math.floor(Math.random() * 2);
