@@ -1,70 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <style>
-            * {
-                box-sizing: border-box;
-            }
+      #ten {
+        width: 100px;
+        border: solid 1px;
+      }
 
-            #ten {
-                width: 100px;
-                border: solid 1px;
-            }
+      .block {
+        width: 50px;
+        height: 50px;
+        border: solid 1px;
+        float: left;
+      }
 
-            .block {
-                width: 50px;
-                height: 50px;
-                border: solid 1px;
-                float: left;
-            }
+      #c {
+        height: 50px;
+        width: 200px;
+        background-color: pink;
+      }
+    </style>
+  </head>
 
-            #c {
-                height: 50px;
-                width: 200px;
-                background-color: pink;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div id="ten" style="width:200px;padding:20px;">LOL</div>
-        <div id="c">
-            <div class="block"></div>
-            <div class="block" onmouseover="change(this)"></div>
-            <div class="block"></div>
-            <div class="block"></div>
-        </div>
-        <script>
-            /*
+  <body>
+    <div id="ten" style="width: 200px; padding: 20px">LOL</div>
+    <div id="c">
+      <div class="block"></div>
+      <div class="block" onmouseover="change(this)"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+    </div>
+    <script>
+      /*
             const c = document.getElementById("c");
             c.onmouseover = function () {
                 console.log("over")
                 this.style.backgroundColor = "red";
             }*/
-            function change(d) {
-                let parent = d.parentElement
-                console.log(parent)
-                let childrens = parent.children
-                console.log(childrens);
-            }
+      function change(d) {
+        let parent = d.parentElement;
+        console.log(parent);
+        let childrens = parent.children;
+        console.log(childrens);
+      }
 
+      const el = document.getElementById("ten");
 
-
-
-            const el = document.getElementById("ten");
-
-            el.onclick = function () {
-                let w = parseInt(getComputedStyle(el).width); // el.style.width;
-                console.log(w);
-                el.style.width = (w + 50) + "px"
-                el.style.color = "pink"
-                el.setAttribute("style", "color:red;")
-            }
-        </script>
-    </body>
-
+      el.onclick = function () {
+        let w = parseInt(getComputedStyle(el).width); // el.style.width;
+        console.log(w);
+        el.style.width = w + 50 + "px";
+        el.style.color = "pink";
+        el.setAttribute("style", "color:red;");
+      };
+    </script>
+  </body>
 </html>

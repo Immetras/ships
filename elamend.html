@@ -1,47 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
+  <body>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        let closure = function (i) {
+          return function () {
+            console.log("i:", i);
+          };
+        };
 
-    <body>
-        <script>
-            document.addEventListener("DOMContentLoaded", (event) => {
+        for (var i = 0; i < 5; i++) {
+          // var / let
+          const bt = document.createElement("button");
+          bt.innerText = "kliknij mnie";
 
-                let closure = function (i) {
-                    return function () {
-                        console.log("i:", i)
-                    }
-                }
+          bt.onclick = closure(i);
 
-                for (var i = 0; i < 5; i++) { // var / let
-                    const bt = document.createElement("button");
-                    bt.innerText = "kliknij mnie";
+          document.body.append(bt);
+        }
+      });
 
-                    bt.onclick = closure(i)
-
-                    document.body.append(bt);
-                }
-            });
-
-            let game = {
-                init() {
-                    const bt = document.createElement("button");
-                    bt.innerText = "TEST";
-                    bt.onclick = this.log("ala ma kota")
-                    document.body.append(bt);
-                },
-                log(txt) {
-                    return () => {
-                        console.log(txt);
-                    }
-                }
-            }
-            game.init();
-        </script>
-    </body>
-
+      let game = {
+        init() {
+          const bt = document.createElement("button");
+          bt.innerText = "TEST";
+          bt.onclick = this.log("ala ma kota");
+          document.body.append(bt);
+        },
+        log(txt) {
+          return () => {
+            console.log(txt);
+          };
+        },
+      };
+      game.init();
+    </script>
+  </body>
 </html>

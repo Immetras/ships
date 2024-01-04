@@ -1,68 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script>
-        let dane = {
-            wiek: 44,
-            wzrost: 176,
-            imie: "Maciej",
-            init() {
-                console.log("init", this);
-                //dane.krzyknij(); // nie chcę!!!!
-                this.krzyknij();
-                this.skocz();
-                const bt = document.createElement("button");
-                bt.innerText = "Kliknij a pokaze Ci imię";
+      let dane = {
+        wiek: 44,
+        wzrost: 176,
+        imie: "Maciej",
+        init() {
+          console.log("init", this);
+          //dane.krzyknij(); // nie chcę!!!!
+          this.krzyknij();
+          this.skocz();
+          const bt = document.createElement("button");
+          bt.innerText = "Kliknij a pokaze Ci imię";
 
-                /*
+          /*
                 let dys = this;
                 bt.onclick = function () {
                     console.log("klik", this, dys);
                     this.innerText = dys.imie
                 }*/
 
-                /*
+          /*
                 bt.onclick = function (e) {
                     console.log("klik", this, e.target); // Objekt
                     e.target.innerText = this.imie
                 }.bind(this);
                 */
 
-                bt.onclick = (e) => {
-                    console.log("klik", this, e.target); // Objekt  el
-                    e.target.innerText = this.imie
-                }
+          bt.onclick = (e) => {
+            console.log("klik", this, e.target); // Objekt  el
+            e.target.innerText = this.imie;
+          };
 
-                document.body.append(bt);
-            },
-            krzyknij() {
-                console.log("kr", this); // Objekt
-                console.log("Elooo!!!");
-            },
-            pierdnij: function () {
-                console.log("pr", this); // Objekt
-                console.log("pfff!");
-            },
-            skocz: () => {
-                console.log("skocz", this);
-                console.log("hoppp");
-            },
-        }
-        console.log(dane, dane.wiek)
+          document.body.append(bt);
+        },
+        krzyknij() {
+          console.log("kr", this); // Objekt
+          console.log("Elooo!!!");
+        },
+        pierdnij: function () {
+          console.log("pr", this); // Objekt
+          console.log("pfff!");
+        },
+        skocz: () => {
+          console.log("skocz", this);
+          console.log("hoppp");
+        },
+      };
+      console.log(dane, dane.wiek);
 
-        document.addEventListener("DOMContentLoaded", (event) => {
-            dane.init();
-        });
-
+      document.addEventListener("DOMContentLoaded", (event) => {
+        dane.init();
+      });
     </script>
-</head>
+  </head>
 
-<body oncontextmenu="console.log('ctx'); event.preventDefault();">
-
-</body>
-
+  <body oncontextmenu="console.log('ctx'); event.preventDefault();"></body>
 </html>
