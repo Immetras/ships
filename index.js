@@ -25,13 +25,13 @@ function main() {
       botBoardArr[i].push(undefined);
     }
   }
-  console.table(botBoardArr);
+  // console.table(botBoardArr);
 
   updateBoard(botBoard, botBoardArr);
 
   // adding ships to bot table
   let botShips = ships;
-  console.log(botShips);
+  // console.log(botShips);
 
   for (let i = 0; i < botShips.length; i++) {
     let cantFit = placeRandom(botShips[i].type);
@@ -39,8 +39,10 @@ function main() {
       cantFit = placeRandom(botShips[i].type);
     }
   }
-
+  console.group();
+  console.log("bot array");
   console.table(botBoardArr);
+  console.groupEnd();
   updateBoard(botBoard, botBoardArr);
 
   //* player
@@ -53,7 +55,11 @@ function main() {
       playerBoardArr[i].push(undefined);
     }
   }
+  console.group();
+  console.log("player array");
   console.table(playerBoardArr);
+  console.groupEnd();
+  // playerBoardArr[5][6] = 3;
 
   updateBoard(playerBoard, playerBoardArr);
 
@@ -74,11 +80,31 @@ function main() {
         }
         // console.log(this.parentElement.children)
       });
-      playerShip.addEventListener("mouseleave", function () {
+      playerShip.addEventListener("mouseleave", leave);
+      playerShip.addEventListener("mousedown", function () {
+        // console.log("click", this);
+        // console.log(i, playerShips[i]);
+        this.removeEventListener("mouseleave", leave);
+
+        const playerTableEvent =
+          document.getElementById("playerBoard").children[0].children;
+
+        console.log(playerTableEvent);
+        for (let j = 0; j < playerTableEvent.length; j++) {
+          for (let k = 0; k < playerTableEvent[j].children.length; k++) {
+            const element = playerTableEvent[j].children[k];
+            element.addEventListener("mouseover", function () {
+              updateBoard(playerBoard, playerBoardArr);
+            });
+          }
+        }
+      });
+
+      function leave() {
         for (let k = 0; k < this.children.length; k++) {
           this.children[k].style.backgroundColor = null;
         }
-      });
+      }
 
       for (let j = 0; j < playerShips[i].type; j++) {
         const shipFlag = document.createElement("div");
@@ -119,13 +145,13 @@ function main() {
     }
     posX++;
     posY++;
-    return place(posX, posY, orient, botBoardArr, ship);
+    return place(posX, posY, orient, botBoardArr, ship, true);
 
     // console.table(botBoardArr);
   }
 
   // place ship function
-  function place(x, y, rotation, array, size) {
+  function place(x, y, rotation, array, size, real) {
     const horiz = (rotation + 1) % 2;
     let placed = false;
 
@@ -142,14 +168,14 @@ function main() {
         array[x + i * rotation + 1][y + i * horiz + 1] == 1
       ) {
         placed = true;
-        // console.log(placed);
+        // console.log("cannot");
         return true;
       }
     }
 
     if (placed == false) {
       for (let i = 0; i < size; i++) {
-        array[x + i * rotation][y + i * horiz] = 1;
+        array[x + i * rotation][y + i * horiz] = real ? 1 : 3;
       }
       // console.log(placed);
       return false;
@@ -159,6 +185,10 @@ function main() {
   // update board function
   function updateBoard(board, boardArr) {
     board.innerHTML = null;
+    // console.group();
+    // console.log("updating");
+    // console.table(boardArr);
+    // console.groupEnd();
 
     const table = document.createElement("table");
 
@@ -171,12 +201,13 @@ function main() {
           case undefined:
             null;
             break;
-          case 0:
-            col.className = "surr";
-            break;
 
           case 1:
             col.className = "filled";
+            break;
+
+          case 3:
+            col.className = "placing";
             break;
 
           default:

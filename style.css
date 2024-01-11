@@ -19,14 +19,15 @@ td {
   background-color: white;
   /* border: 1px solid black; */
   border-radius: 2px;
+  overflow: hidden;
 }
 
 td.filled {
   background-color: black;
 }
 
-td.surr {
-  background-color: aqua;
+td.placing {
+  background-color: green;
 }
 
 #main {
@@ -34,6 +35,7 @@ td.surr {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 600px;
 }
 
 #row {
@@ -52,11 +54,15 @@ td.surr {
   display: flex;
   flex-direction: column;
 }
+#botBoard td:hover {
+  background-color: darkseagreen;
+}
 
 .displayShip {
   border-radius: 2px;
   border: 1px solid black;
   display: flex;
+  position: relative;
 }
 
 .displayShip .flag {
